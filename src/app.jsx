@@ -32,8 +32,12 @@ function App() {
         body: JSON.stringify({ text: input }),
       })
 
-      const data = await response.json()
+      //const data = await response.json()
+      const raw = await response.text()
+      console.log('API status:', response.status)
+      console.log('API response:', raw)
 
+      const data = JSON.parse(raw)
       if (!response.ok) {
         throw new Error(data.detail || 'Unable to parse tasks.')
       }
