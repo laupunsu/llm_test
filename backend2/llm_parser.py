@@ -15,7 +15,7 @@ app = FastAPI(title="Standalone LLM Task Parser")
 
 cors_origins = os.getenv(
     "CORS_ORIGINS",
-    "https://timely-task-parsel.vercel.app,http://localhost:5173"
+    "https://timely-task-parser.vercel.app, http://localhost:5173"
 )
 
 app.add_middleware(
