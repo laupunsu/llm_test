@@ -24,8 +24,9 @@ function App() {
     setConfirmed(false)
     setTasks([])
 
+    const API_URL = import.meta.env.VITE_API_URL;
     try {
-      const response = await fetch('/parse-tasks', {
+      const response = await fetch(`${API_URL}/parse-tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: input }),
