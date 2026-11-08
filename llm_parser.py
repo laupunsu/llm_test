@@ -4,7 +4,7 @@ import re
 import urllib.error
 import urllib.request
 from typing import Any
-
+from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
@@ -12,7 +12,15 @@ from pydantic import BaseModel, Field
 load_dotenv()
 
 app = FastAPI(title="Standalone LLM Task Parser")
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://timelyparsing.vercel.app","http://localhost:5173"
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class ParseRequest(BaseModel):
     text: str = Field(min_length=1, max_length=8000)
