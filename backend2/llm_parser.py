@@ -12,10 +12,17 @@ from pydantic import BaseModel, Field
 load_dotenv()
 
 app = FastAPI(title="Standalone LLM Task Parser")
+
+cors_origins = os.getenv(
+    "CORS_ORIGINS",
+    "https://timely-task-parsel.vercel.app,http://localhost:5173"
+)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        CORS_ORIGINS,"http://localhost:5173"
+        origin.strip()
+        for origin in cors_origins.split(",")
     ],
     allow_credentials=True,
     allow_methods=["*"],
